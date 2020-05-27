@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+    1stapp:
+        build: .
+        ports: 
+            - "8080:5000"
