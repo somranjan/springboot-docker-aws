@@ -1,9 +1,11 @@
-FROM java:8
 
-WORKDIR /opt/app
-
-COPY target/01-spring-boot-hello-world-rest-api-0.0.1-SNAPSHOT.jar app.jar
-
+FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
+COPY pom.xml /build/
+COPY src /build/src/
+WORKDIR /build/
+RUN mvn package
+FROM openjdk:8-jre-alpine
+WORKDIR /app
+COPY --from=MAVEN_BUILD /build/target/springboot-docker-aws-0.0.1-SNAPSHOT.jar /app/app.jar
 EXPOSE 5000
-
-ENTRYPOINT [ "java", "-jar" , "app.jar" ]
+ENTRYPOINT ["java", "-jar", "app.jar"]
