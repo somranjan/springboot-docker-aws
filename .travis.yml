@@ -1,0 +1,26 @@
+  
+language: generic 
+
+sudo: require
+
+services:
+    - docker
+
+before_install:
+    - docker build -t spring-boot-aws .
+
+# script:
+#     - docker run -e CI=true somranjan87/spring-boot-aws
+    
+    
+# deploy:
+#     provider: elasticbeanstalk
+#     region: "us-east-2"
+#     app: "docker-react"
+#     env: "DockerReact-env-1"
+#     bucket_name: "elasticbeanstalk-us-east-2-516684136522"
+#     bucket_path: "docker-react"
+#     on:
+#        branch: master
+#     access_key_id: $AWS_ACCESS_KEY
+#     secret_access_key: $AWS_SECRET_KEY  
